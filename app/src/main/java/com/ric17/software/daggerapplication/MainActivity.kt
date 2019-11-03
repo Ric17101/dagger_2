@@ -10,14 +10,13 @@ import javax.inject.Inject
 class MainActivity : AppCompatActivity() {
 
    @Inject lateinit var car: Car
-    //@Inject lateinit var info: Info
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         val component: CarComponent = DaggerCarComponent.create()
-        this.car = component.getCar()
+        component.inject(this@MainActivity)
         this.car.drive()
     }
 }
